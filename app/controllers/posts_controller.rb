@@ -19,14 +19,29 @@ class PostsController < ApplicationController
 
   def create
     @post = Post.new(post_params)
-    @post.save
-    redirect_to post_path @post
+    if @post.save
+      redirect_to '/posts/' + @post.id.to_s
+    else  
+      @topics = Topic.all()
+      render 'new'
+    end
   end
 
   def update
     @post = Post.find(params[:id])
-    @post.update(post_params)
-    redirect_to post_path @post
+    if @post.update(post_params)
+      redirect_to '/posts/' + @post.id.to_s
+    else  
+      @topics = Topic.all()
+      render 'edit'
+    end
+  end
+
+  def posts_by_topic
+    @topic = Topic.find_by(alias: params[:topic])
+    @posts = @topic.posts
+
+    render 'index'
   end
 
 
