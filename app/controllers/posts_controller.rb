@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
 
   def index
-    @posts = Post.all()
+    @posts = Post.order('created_at DESC').page(params[:page]).per(5)
   end
 
   def show
@@ -39,7 +39,7 @@ class PostsController < ApplicationController
 
   def posts_by_topic
     @topic = Topic.find_by(alias: params[:topic])
-    @posts = @topic.posts
+    @posts = @topic.posts.order('created_at DESC').page(params[:page]).per(5)
 
     render 'index'
   end

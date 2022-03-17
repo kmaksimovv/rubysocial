@@ -17,3 +17,9 @@ ru:
               required: "Комментарий не может быть пустым"
               too_short: "Ваш комментарий какой-то несодержательный"
               too_long: "Слишком много букв, которые никто не будет читать"
+  views:
+    pagination:
+      first: "&laquo; начало"
+      last: "конец &raquo;"
+      previous: "&lsaquo; пред"
+      next: "след &rsaquo;"
