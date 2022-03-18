@@ -7,4 +7,24 @@
             <p class="card-text"><%= @post.body%></p>
         </div>
     </div>
-</div>
+
+
+        <% @comments.each do |comment| %>
+        <div class="media mb-4">
+          <div class="media-body">
+            <h3 class="mt-0">Commenter Name</h3>
+            <%= comment.body %>
+            <% if @replies.key?(comment.id) %>
+              <% @replies[comment.id].each do |reply| %>
+                <div class="media mt-4">
+                  <div class="media-body">
+                    <h6 class="mt-0">Commenter Name</h6>
+                      <%= reply.body %>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <% end %>
+    </div>

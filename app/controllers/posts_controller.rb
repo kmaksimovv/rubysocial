@@ -6,6 +6,8 @@ class PostsController < ApplicationController
 
   def show
     @post = Post.find(params[:id])
+    @comments = Comment.comments_for_post(@post.id)
+    @replies = Comment.replies_for_post(@post.id)
   end
 
   def new
