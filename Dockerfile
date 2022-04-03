@@ -1,19 +1,27 @@
-FROM ruby:2.7.5-alpine
+FROM ruby:2.7.5
+
+RUN apt-get update
+RUN apt-get install sudo
+RUN sudo apt-get install -y nodejs
+RUN sudo apt-get install -y gcc g++ make python2
+RUN curl -sL https://dl.yarnpkg.com/debian/pubkey.gpg | gpg --dearmor | sudo tee /usr/share/keyrings/yarnkey.gpg >/dev/null
+RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com/debian stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+RUN sudo apt-get update && sudo apt-get install -y yarn
 
 WORKDIR /usr/src/app
-
-RUN apk add python2 make g++
-RUN apk add yarn nodejs
-RUN apk add build-essential
-
 COPY . .
 
-RUN yarn install
-RUN bundle config --global frozen 1
-RUN bundle install --without development test
+ENV RAILS_ENV=production
+ENV RAILS_SERVE_STATIC_FILES true
+ENV RAILS_LOG_TO_STDOUT true
 
-ENV RAILS_ENV production
-RUN rails webpacker:compile
+RUN yarn install
+RUN bundle config set without 'development test'
+RUN bundle config --global frozen 1
+RUN bundle install
+RUN bundle exec rails assets:precompile
+RUN RAILS_ENV=production rails webpacker:compile
 
 EXPOSE 3000
-CMD ['rails', 'server', '-b', '0.0.0.0']
+
+CMD ["rails", "server"]
