@@ -10,6 +10,7 @@ services:
 
   app:
     build: .
+    image: app_rubysocial:latest
     container_name: app_rubysocial
     ports:
       - "80:3000"
