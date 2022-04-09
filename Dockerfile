@@ -9,19 +9,22 @@ RUN echo "deb [signed-by=/usr/share/keyrings/yarnkey.gpg] https://dl.yarnpkg.com
 RUN sudo apt-get update && sudo apt-get install -y yarn
 
 WORKDIR /usr/src/app
-COPY . .
 
 ENV RAILS_ENV production
 ENV RAILS_SERVE_STATIC_FILES true
 ENV RAILS_LOG_TO_STDOUT true
 
+COPY package*.json ./
 RUN yarn install
+
+COPY Gemfile Gemfile.lock ./
 RUN bundle config set without 'development test'
 RUN bundle config --global frozen 1
 RUN bundle install
-RUN RAILS_ENV=production bundle exec rake assets:precompile
+
+COPY . .
+
 RUN RAILS_ENV=production rails webpacker:compile
-RUN RAILS_ENV=production rake assets:precompile
 
 EXPOSE 3000
 
