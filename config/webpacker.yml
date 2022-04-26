@@ -95,4 +95,5 @@ production:
 
   # Cache manifest.json for performance
   cache_manifest: true
- 
+  
+  # Production requires the packs folder to be in assets for nginx
