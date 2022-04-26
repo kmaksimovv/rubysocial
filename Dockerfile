@@ -10,13 +10,7 @@ RUN sudo apt-get update && sudo apt-get install -y yarn
 
 WORKDIR /usr/src/app
 
-ENV RAILS_ENV=production \
-    NODE_ENV=production \
-    RAILS_SERVE_STATIC_FILES=true \
-    RAILS_LOG_TO_STDOUT=true \
-    RACK_TIMEOUT_SERVICE_TIMEOUT=60 \
-    BUNDLE_SILENCE_ROOT_WARNING=1
-
+ENV RAILS_ENV production
 COPY package*.json ./
 RUN yarn install
 
@@ -27,9 +21,8 @@ RUN bundle install
 
 COPY . .
 
-RUN RAILS_ENV=production rails webpacker:clean && RAILS_ENV=production rails webpacker:clobber && RAILS_ENV=production rails webpacker:compile
+RUN RAILS_ENV=production rails webpacker:compile
 
 EXPOSE 3000
 
-# RAILS_SERVE_STATIC_FILES=true bin/rails s -e production
 CMD ["rails", "server", "-e", "production"]]
