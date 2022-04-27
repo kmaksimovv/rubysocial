@@ -25,4 +25,5 @@ RUN RAILS_ENV=production rails webpacker:compile
 
 EXPOSE 3000
 
-CMD ["rails", "server", "-e", "production"]]
+CMD ["rails", "server", "-e", "production"]
+
