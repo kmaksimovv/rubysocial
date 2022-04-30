@@ -14,7 +14,16 @@ jobs:
     steps:
       - name: SET GITHUB_REF
         # run: echo ::set-env name=RELEASE_VERSION_REF::$(echo ${GITHUB_REF})
-        run: echo ${GITHUB_REF}
-          
+        run: echo $GITHUB_REF
+
+      - name: SET GITHUB_REF_NAME_ECHO
+        run: echo $GITHUB_REF_NAME
+
+      - name: SET RUNNER OS
+        run: echo $RUNNER_OS
+
+
+
       - name: SET GITHUB_REF_NAME
-        run: echo ::set-env name=RELEASE_VERSION_REF_NAME::$(echo ${GITHUB_REF_NAME})
+        # run: echo $env:GITHUB_REF_NAME
+        run: echo '::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)'
