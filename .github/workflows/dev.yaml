@@ -44,7 +44,7 @@ jobs:
       
       - name: Get the version 
         id: get_version 
-        run: echo "TAG_VERSION=$(echo $GITHUB_REF | cut -d / -f 3)" >> $GITHUB_ENV
+        run: echo "TAG_VERSION=$(echo $GITHUB_REF | cut -d / -f 3 | sed 's/v//)" >> $GITHUB_ENV
 
       - name: Echo TAG_VERSION
         run: echo $TAG_VERSION
