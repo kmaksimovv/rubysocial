@@ -1,0 +1,17 @@
+name: Project web-application rubysocial
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'
+
+jobs:
+  build_docker_image:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: SET GITHUB_REF
+        run: echo ::set-env name=RELEASE_VERSION_REF::$(echo ${GITHUB_REF})
+          
+      - name: SET GITHUB_REF_NAME
+        run: echo ::set-env name=RELEASE_VERSION_REF_NAME::$(echo ${GITHUB_REF_NAME})
