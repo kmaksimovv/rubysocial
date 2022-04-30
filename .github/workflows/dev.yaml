@@ -7,9 +7,15 @@ on:
     branches:
       - "test*"  
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
 jobs:
   build_docker_image:
     runs-on: ubuntu-latest
+
+
 
     steps:
       - name: SET GITHUB_REF
@@ -22,11 +28,13 @@ jobs:
       - name: SET RUNNER OS
         run: echo $RUNNER_OS
 
+      - name: TEST ENV
+        run: echo ${{ env.REGISTRY }} and ${{ IMAGE_NAME }}
 
 
       - name: SET GITHUB_REF_NAME
         # run: echo $env:GITHUB_REF_NAME
-        run: echo '::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)'
+        run: echo '::set-output name=VERSION::$(echo $GITHUB_REF)'
 
       - name: echo VERSION
         run: echo $VERSION
