@@ -27,3 +27,6 @@ jobs:
       - name: SET GITHUB_REF_NAME
         # run: echo $env:GITHUB_REF_NAME
         run: echo '::set-output name=VERSION::$(echo $GITHUB_REF | cut -d / -f 3)'
+
+      - name: echo VERSION
+        run: echo $VERSION
