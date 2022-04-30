@@ -28,7 +28,10 @@ jobs:
         run: echo "RELEASE_VERSION=$(echo $GITHUB_REF | cut -d / -f 3 | sed 's/v//')" >> $GITHUB_ENV  
 
       - name: ECHO RELEASE VERSION 
-        run: echo $RELEASE_VERSION 
+        run: echo $RELEASE_VERSION
+
+      - name: ECHO TAGS
+        run: echo ${{ secrets.DOCKER_HUB_LOGIN }}/rubysocial:$RELEASE_VERSION
 
       - name: Build and push in Docker hub
         uses: docker/build-push-action@v2
