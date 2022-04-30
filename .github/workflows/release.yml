@@ -33,4 +33,4 @@ jobs:
           context: ./
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKER_HUB_LOGIN }}/rubysocial:$RELEASE_VERSION
+          tags: ${{ secrets.DOCKER_HUB_LOGIN }}/rubysocial:${{RELEASE_VERSION}}
