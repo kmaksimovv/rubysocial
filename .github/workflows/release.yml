@@ -2,8 +2,8 @@ name: Project web-application rubysocial
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - "v1.*"
 
 jobs:
   build_docker_image:
