@@ -1,4 +1,4 @@
-name: Push iso Docker Hub
+name: Push Image Docker Hub
 
 on:
   push:
