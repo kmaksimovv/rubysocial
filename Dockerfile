@@ -1,5 +1,9 @@
 FROM ruby:2.7.5
 
+ARG RAILS_MASTER_KEY
+
+ENV RAILS_MASTER_KEY=${RAILS_MASTER_KEY}
+
 RUN apt-get update
 RUN apt-get install sudo
 RUN sudo apt-get install -y nodejs

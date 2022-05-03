@@ -9,7 +9,10 @@ services:
       POSTGRES_PASSWORD: postgres 
 
   app:
-    build: .
+    build:
+      context: .
+      args:
+       RAILS_MASTER_KEY: $RAILS_MASTER_KEY_PROD
     image: rubysocial
     container_name: app_rubysocial
     ports:

@@ -33,3 +33,7 @@ public/assets
 # Ignore uploaded files in development
 /storage/*
 !/storage/.keep
+
+#credentials
+/config/master.key
+/config/credentials/production.key

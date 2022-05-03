@@ -2,8 +2,8 @@ name: Push Image Docker Hub
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - "**"
 
 jobs:
   build_docker_image:
@@ -33,4 +33,9 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_HUB_LOGIN }}/rubysocial:${{env.RELEASE_VERSION}}
+          build_args: 
+            RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY_PROD }}
+     
+      - name: Image digest 
+        run: echo ${{ steps.docker_build.outputs.digest }}             
           
