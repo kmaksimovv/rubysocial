@@ -53,6 +53,8 @@ jobs:
           push: ${{ github.event_name != 'pull_request' }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+          build-args: |
+            RAILS_MASTER_KEY=${{ secrets.RAILS_MASTER_KEY_PROD }}          
 
       - name: Sign the published Docker image
         if: ${{ github.event_name != 'pull_request' }}
